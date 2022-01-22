@@ -266,7 +266,7 @@ def register_data():
         return render_template("register.html")
 
 @app.route("/add", methods=["GET", "POST"])
-@login_required
+# @login_required
 def add_patient():
     if request.method == "POST":
 
