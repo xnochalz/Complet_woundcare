@@ -1,0 +1,276 @@
+
+body {
+  font-family: "Montserrat";
+  text-align: center;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat-Bold";
+}
+
+p {
+  color: #8f8f8f;
+}
+hr {
+  border-style: dotted;
+  border-color: white;
+  border-left: 50px;
+  width: 50%;
+  height: 2px;
+}
+form {
+  width: 100%;
+  display: block;
+  padding-top: 20px;
+
+
+}
+label {
+  font-weight: bold;
+}
+/* input {
+  width: 1100px;
+} */
+/* Headings */
+.bottom_page {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+
+.manage_background {
+  width: 450px;
+  height: 150;
+  padding-left: 450px;
+
+}
+.app_heading {
+  padding-left: 200px;
+  padding-left:100px;
+  padding-right: 100px;
+
+}
+
+.big-heading {
+  font-family: "Montserrat-Black";
+  font-size: 2.5rem;
+  line-height: 1.5;
+}
+
+.section-heading {
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+.register {
+  background-color: #95CD41;
+  height: 100px;
+  padding-left: 150px:
+  padding-right: 50px;
+
+}
+.reg_heading {
+  color: #000D6B;
+  
+}
+.login-heading {
+  color: #00bfff;
+}
+
+.login-card {
+    width: 325;
+    height: 154;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 40px;
+    padding-right: 30px;
+
+
+}
+
+/* Containers */
+
+.container-fluid{
+  padding: 7% 15%;
+
+}
+
+/* Sections */
+
+.colored-section {
+  background-color: #95CD41;
+  color: #fff;
+}
+
+.white-section {
+  background-color: #F0F8FF;
+}
+.topnav {
+  height: 50px;
+}
+
+.form-style {
+  padding-top: 2px;
+  border-style: solid;
+  border-color: aliceblue;
+  border-left: 50px;
+  border-right: 50px;
+  /* width: 90%;
+  height: 90%; */
+}
+.header_patients{
+    background-color: #95CD41;
+    width: 100%;
+}
+/* Navigation Bar */
+
+.navbar {
+  padding: 0 0 4.5rem;
+}
+
+.navbar-brand {
+  font-family: "Ubuntu";
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.nav-item {
+  padding: 0 18px;
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  font-family: "Montserrat-Light";
+}
+
+.navigation_top_bar{
+  border-style: double;
+  padding-top: 0px;
+  color: #000D6B;
+}
+
+/* Buttons */
+
+.download-button {
+  margin: 5% 3% 5% 0;
+  border-color: white;
+  color: White;
+}
+
+/* Title Section */
+
+#title {
+  background-color: #95CD41;
+  color: #fff;
+  text-align: left;
+}
+
+#title .container-fluid {
+  padding: 3% 15% 7%;
+}
+
+/* Title Image */
+
+.title-image {
+  /* width: 50%;
+  transform: rotate(180deg);
+  position: absolute;
+  right: 10%; */
+  width: 200px;
+  height: 200px;
+  margin-top: 10px;
+  margin-right: 250px;
+}
+
+/* Features Section */
+
+#features {
+  position: relative;
+}
+
+.feature-title {
+  font-size: 1.5rem;
+}
+
+.feature-box {
+  padding: 4.5%;
+}
+
+.icon {
+  color: #ef8172;
+  margin-bottom: 1rem;
+}
+
+.icon:hover {
+  color: #ff4c68;
+}
+
+/* Testimonial Section */
+
+#testimonials {
+  background-color: #ef8172;
+}
+
+.testimonial-text {
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+.testimonial-image {
+  width: 10%;
+  border-radius: 100%;
+  margin: 20px;
+}
+
+
+#press {
+  background-color: #ef8172;
+  padding-bottom: 3%;
+}
+
+.press-logo {
+  width: 15%;
+  margin: 20px 20px 50px;
+}
+
+/* Pricing Section */
+
+#pricing {
+  padding: 100px;
+}
+
+.price-text {
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+.pricing-column {
+  padding: 3% 2%;
+  margin-left: 500px;
+  margin-right: 500px;
+}
+
+/* CTA Section */
+
+
+/* Footer Section */
+
+
+.social-icon {
+  margin: 20px 10px;
+}
+
+@media (max-width: 1028px) {
+
+  #title {
+    text-align: center;
+  }
+
+  /* .title-image {
+    position: static;
+    transform: rotate(100);
+    margin-top: 100px;
+    margin-right: 250px;
+  } */
+}

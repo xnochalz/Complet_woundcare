@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Patient</title>
+</head>
+<body>
+
+{{ id }}
+     <form action="{{ url_for('edit') }}" method="POST">
+        <p>Patient Name: {{patients.tissue_loss}}</p>
+        <p>Patient's Current Weight {{patients.weight}}</p>
+         <input hidden="hidden" name="id" value="{{patients.id}}">
+        <input name="weight" type="text" placeholder="New weight">
+        <button type="submit">Change Weight</button>
+    </form>
+</body>
+</html>

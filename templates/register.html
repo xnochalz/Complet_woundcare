@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Ubuntu" rel="stylesheet">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/css/styles.css">
+
+  <!-- Font Awesome -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  <!-- Bootstrap Scripts -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+
+
+  <body >
+
+    <section class="colored-section " id="title">
+
+      <div class="container-fluid colored-section" style="padding-bottom: 5px; color: #000D6B;">
+
+        <!-- Nav Bar -->
+
+        <nav class="navbar navbar-expand-lg navbar-dark" style="margin-right: 300px;">
+
+          <!-- <img class="title-image" src="images/logo.png" alt="firsr_aid"> -->
+
+          <a class="navbar-brand" href="">WOUNDCARE
+          </a>
+
+
+
+
+    <div class="container-fluid register">
+      <h1 class="reg_heading">Register</h1>
+    </div>
+
+    <div class="app_heading"> </div>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a  href="register.html" class="nav-link" href="#footer"></a>
+        </li>
+        <li class="nav-item">
+          <a href="login.html" class="nav-link" href="#pricing"><button type="button" class="btn btn-outline-primary btn-sm download-button">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#cta"><button type="button" class="btn btn-dark btn-sm btn-outline-primary download-button">Reports</a>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+
+</section>
+
+    <header class="masthead" style="background-image: url('static/img/contact-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            {% if msg_sent: %}
+            <h1>Successfully sent your message</h1>
+            {% else: %}
+            <h1></h1>
+            {% endif %}
+<!--            <span class="subheading">Have questions? I have answers.</span>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+<div>
+  <section>
+
+
+    <form action="{{ url_for('register_data') }}" method="post" novalidate>
+
+        <div class="form-group floating-label-form-group controls row">
+          <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Full Names</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" id="fullname" name="fullname" placeholder="e.g mustafa " required data-validation-required-message="Please enter your full name.">
+          </div>
+        </div>
+
+      <div class="form-group row">
+        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Date Of Birth</label>
+        <div class="col-sm-10">
+          <input type="datetime-local" class="form-control form-control-sm" id="" name="dob" placeholder="e.g 01-01-2020" required data-validation-required-message="Please enter your date of birth.">
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="user name" class="col-sm-2 col-form-label col-form-label-sm">Username</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control form-control-sm" id="username" name="username" placeholder="e.g daniel" required data-validation-required-message="Please enter your username">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="Password " class="col-sm-2 col-form-label col-form-label-sm">password</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="@-123ert" required data-validation-required-message="Please enter your password.">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="Card " class="col-sm-2 col-form-label col-form-label-sm">ID card Number</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control form-control-sm" id="cardNumber" name="cardnumber" placeholder="e.g 001100200" required data-validation-required-message="Please enter your card number.">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="Gender " class="col-sm-2 col-form-label col-form-label-sm">Gender</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control form-control-sm" id="gender" name="gender" placeholder="e.g male " required data-validation-required-message="Please enter your gender.">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="Email " class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder=" email address" required data-validation-required-message="Please enter your email.">
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="height " class="col-sm-2 col-form-label col-form-label-sm">Height</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control form-control-sm" id="" name="height" placeholder="e.g 17.7" required data-validation-required-message="Please enter your height.">
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="Medical History " class="col-sm-2 col-form-label col-form-label-sm">Past Medical History </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control form-control-sm" id="" name="history" placeholder="e.g cough, fever" required data-validation-required-message="Please enter your medical history.">
+        </div>
+      </div>
+
+
+      <div class="form-example">
+          <button type="submit" class="btn btn-primary mb-2">Register Me</button>
+        </div>
+
+
+
+    </form>
+
+
+  </section>
+
+</div>
+
+  </body>
+</html>

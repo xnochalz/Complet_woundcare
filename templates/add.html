@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+</head>
+<body>
+<h1>My Library</h1>
+
+<form action="{{ url_for('add') }}" method="POST">
+
+    <ul>
+        {% for patient in patients %}
+        <li>{{patients.odor}} - {{patients.edges}} - {{patients.bmi}}/10</li>
+        {% endfor %}
+    </ul>
+</form>
+<a href="{{ url_for('add') }}">Add New Patient</a>
+</body>
+</html>

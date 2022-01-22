@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% include "header.html" %}
+
+{% block title %}All Patients{% endblock %}
+
+{% block content %}
+
+{% for wound in wounds %}
+
+<div class="container fluid col-md-9" >
+    <form>
+        <div class="row ">
+        <div class="col-md-12 form-control form-control-md">
+            {{ wound.exudate_amount.label }} <br> {{ wound.weight}}<br>
+     <a href="{{ url_for('delete', id=wounds.id) }}" class="button">Delete</a>
+            {{ wound.exudate_amount }}, {{wound.type_of_tissue}}, {{wound.tissue_loss}},
+            {{ wound.odor }}, {{ wound.edges }}, {{ wound.weight }}, {{ wound.peri_wound }}
+            {{wound.wound_integrity}}, {{wound.wound_temperature}}, {{wound.wound_texture}},
+            {{wound.wound_pain}}, {{wound.weight}}, {{wound.bmi}}, {{wound.anatomic_location}}
+    <a href="{{ url_for('edit', id=wounds.id) }}" class="button">Edit Patient</a>
+        </div>
+
+
+
+
+
+
+<!--        <div class="col-md-9">-->
+<!--            {{wound.exudate_amount}}, {{wound.type_of_tissue}}, {{wound.tissue_loss}}, {{wound.wound_integrity}} <br>-->
+<!--        </div>-->
+<!--        <div class="col-md-9">-->
+<!--             {{wound.wound_temperature}}, {{wound.wound_texture}}, {{wound.wound_pain}}<br>-->
+
+<!--        </div>-->
+<!--        <div>-->
+<!--            {{wound.weight}}, {{wound.bmi}}, {{wound.anatomic_location}}-->
+        </div>
+
+    </form>
+
+
+{% include "footer.html"%}
+
+    </div>
+
+
+
+ {% endfor %}
+</div>
+
+
+{% endblock %}
+

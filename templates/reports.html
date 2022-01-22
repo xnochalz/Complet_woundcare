@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}Success{% endblock %}
+{% block content %}
+<div class="register">
+  <h1>My WTForm works</h1>
+
+  {{ wtf.quick_form(form, novalidate=True) }}
+</div>
+<style>
+{% block styling %}
+body{
+    background: aliceblue;
+}
+{% endblock %}
+</style>
+
+<div>
+  <h1>Success</h1> Tell me More
+  {{ patients  }}
+</div>
+
+{% endblock %}
+
+
+<!--
+-->
+<!--<html lang="en" dir="ltr">-->
+<!--  <head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <title>Reports</title>-->
+
+<!--    <link href="https://fonts.googleapis.com/css?family=Montserrat|Ubuntu" rel="stylesheet">-->
+
+<!--    &lt;!&ndash; CSS Stylesheets &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+<!--    <link rel="stylesheet" href="css/styles.css">-->
+
+<!--    &lt;!&ndash; Font Awesome &ndash;&gt;-->
+<!--    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>-->
+
+<!--    &lt;!&ndash; Bootstrap Scripts &ndash;&gt;-->
+<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+<!--  </head>-->
+
+<!--  <body style="background-color: #00bfff;">-->
+
+<!--    -->
+<!--  </body>-->
+<!--</html>-->

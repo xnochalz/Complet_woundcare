@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Ubuntu" rel="stylesheet">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/css/styles.css">
+
+  <!-- Font Awesome -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  <!-- Bootstrap Scripts -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+
+
+  <body >
+
+    <section class="colored-section " id="title">
+
+      <div class="container-fluid colored-section" style="padding-bottom: 5px; color: #000D6B;">
+
+        <!-- Nav Bar -->
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+          <!-- <img class="title-image" src="images/logo.png" alt="firsr_aid"> -->
+
+          <a class="navbar-brand" href="">WOUNDCARE
+          </a>
+
+
+
+
+    <div class="container-fluid register">
+      <h1 class="reg_heading">Register</h1>
+    </div>
+
+    <div class="app_heading"> </div>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a  href="register.html" class="nav-link" href="#footer"></a>
+        </li>
+        <li class="nav-item">
+          <a href="login.html" class="nav-link" href="#pricing"><button type="button" class="btn btn-outline-primary btn-lg download-button">Home</a></button>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#cta"><button type="button" class="btn btn-dark btn-outline-primary download-button">Reports</a></button>
+        </li>
+      </ul>
+
+    </div>
+        </nav>
+  </div>
+
+
+</section>
+
+    <header class="masthead" style="background-image: url('static/img/contact-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            {% if msg_sent: %}
+            <h1>Successfully sent your message</h1>
+            {% else: %}
+            <h1></h1>
+            {% endif %}
+<!--            <span class="subheading">Have questions? I have answers.</span>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+<div>
+
+    <form class="container-fluid" method="POST" action="{{ url_for('register') }}" novalidate>
+
+{{ form.csrf_token }}
+<div class="form-group floating-label-form-group controls row">
+    <div class="col-sm-10 col-form-label col-form-label-sm">
+        {{ form.email.label }}
+        {% for err in form.email.errors %}
+        <span style="color:red">{{ err }}</span>
+        {% endfor %}
+    </div>
+    <div class="form-control form-control-sm">
+        {{ form.email(size=30) }}
+         {% for err in form.email.errors %}
+        <span style="color:red">{{ err }}</span>
+        {% endfor %}
+    </div>
+
+    <div>
+    </div>
+
+
+				{{ form.password.label }}  <br> {{ form.password(size=30) }} <br>
+                {% for err in form.password.errors %}
+                <span style="color:red">{{ err }}</span>
+                {% endfor %}
+
+
+
+                {{ form.username.label }}  <br>  {{ form.username(size=30) }} <br>
+                 {% for err in form.username.errors %}
+        <span style="color:red">{{ err }}</span>
+        {% endfor %}
+
+</div>
+        <div class="form-group floating-label-form-group controls row">
+            <div class="col-sm-2 col-form-label col-form-label-sm">
+                {{ form.Height.label }} <br>  {{ form.Height}} <br>
+                 {% for err in form.Height.errors %}
+        <span style="color:red">{{ err }}</span>
+        {% endfor %}
+
+
+
+
+                {{ form.Card_number.label }}  <br>  {{ form.Card_number }} <br>
+                 {% for err in form.Card_number.errors %}
+        <span style="color:red">{{ err }}</span>
+        {% endfor %}
+
+
+
+                {{ form.Gender.label }}  <br>  {{ form.Gender}}  <br>
+                 {% for err in form.Gender.errors %}
+        <span style="color:red">{{ err }}</span>
+        {% endfor %}
+
+
+            </div>
+
+        </div>
+
+        <div class="form-group floating-label-form-group controls row">
+            <div class="col-sm-2 col-form-label col-form-label-sm">
+                {{ form.Full_name.label }}  {{ form.Full_name}}
+                 {% for err in form.Full_name.errors %}
+        <span style="color:red">{{ err }}</span>
+        {% endfor %} <br>
+
+
+<div class="form-group row">
+
+        {{ form.Medical_History.label  }}
+
+    <div>
+        {{ form.Medical_History}}
+        {% for err in form.Medical_History.errors %}
+        <span style="color:red">{{ err }}</span>
+        {% endfor %}
+    </div>
+</div>
+                {{ form.Card_number.label }}  {{ form.Card_number}}
+                 {% for err in form.Card_number.errors %}
+        <span style="color:red">{{ err }}</span>
+        {% endfor %}
+
+
+
+            </div>
+
+        </div>
+
+<div>
+    <input lass="btn btn-primary mb-2" type="submit" value="Let me In">
+</div>
+
+
+
+
+    </form>
+
+</div>
+
+
+{% include "footer.html" %}
+<!--  <form method="POST" action="/login">-->
+<!--    <div>{{ form.username.label }}: {{ form.username(class="css_class") }}</div>-->
+<!--    {% if form.username.errors %}-->
+<!--        <ul class="errors">{% for error in form.username.errors %}<li>{{ error }}</li>{% endfor %}</ul>-->
+<!--    {% endif %}-->
+
+<!--    <div>{{ form.password.label }}: {{ form.password() }}</div>-->
+<!--    {% if form.password.errors %}-->
+<!--        <ul class="errors">{% for error in form.password.errors %}<li>{{ error }}</li>{% endfor %}</ul>-->
+<!--    {% endif %}-->
+<!--</form>-->

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Create patient</title>
+
+    <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Ubuntu" rel="stylesheet">
+
+<!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/css/styles.css">
+
+<!-- Font Awesome -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<!-- Bootstrap Scripts -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script>
+    function showMe (it, box) {
+      var vis = (box.checked) ? "block" : "none";
+      document.getElementById(it).style.display = vis;
+    }
+  </script>
+
+  </head>
+  <body>
+    <section class="colored-section" id="title">
+
+      <div class="container-fluid colored-section" style="padding-bottom: 5px; color: #000D6B;">
+
+        <!-- Nav Bar -->
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+          <!-- <img class="title-image" src="images/logo.png" alt="firsr_aid"> -->
+
+          <a class="navbar-brand" href="">WOUNDCARE
+          </a>
+
+
+
+
+    <div class="container-fluid register col-auto">
+      <h3 class="reg_heading ">Add Patient</h3>
+    </div>
+
+    <div class="app_heading"> </div>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a  href="register.html" class="nav-link" href="#footer"></a>
+        </li>
+        <li class="nav-item">
+          <a href="login.html" class="nav-link" href="#pricing"><button type="button" class="btn btn-outline-primary btn-sm download-button">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#cta"><button type="button" class="btn btn-dark btn-sm btn-outline-primary download-button">Reports</a>
+        </li>
+      </ul>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<section class="form-style">
+
+
+  <form action="{{ url_for('add_patient') }}" method="POST" class="container-fluid col-md-12 " enctype="multipart/form-data">
+<div class="form-row ">
+  <div class="form-group align-items-center">
+    <label for="start">Date of clinic visit:</label>
+
+<input type="date" id="start" name="clinicvisit"
+       value="2022-07-22"
+       min="2022-01-01" max="">
+  </div>
+
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label class="mr-sm-2" for="inlineFormCustomSelect" name="tissue-loss">Extent of tissue loss</label>
+      <select multiple class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="tissueloss">
+        <option selected>Select...</option>
+        <option value="1">Tissue damage but no break in skin surface</option>
+        <option value="2">Superficial</option>
+        <option value="3">Abrasion</option>
+        <option value="4">Partial Thickness </option>
+        <option value="5">Full thickness</option>
+        <option value="6">Necrosis covering wound bed; unable to see depth</option>
+        <option value="7">Deep crater </option>
+        <option value="8">Tendon, muscle, or bone visible</option>
+      </select>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="edges">Edges</label>
+    <select id="" class="form-control" name="edges">
+      <option selected>Select...</option>
+      <option>Attached or open, even with wound base </option>
+      <option>Not attached or closed </option>
+      <option>Rolled under, thickened </option>
+      <option>Fibrotic, scarred </option>
+    </select>
+  </div>
+  <div class="form-group col-md-2">
+    <label for="exudate-amount">Exudate amount</label>
+    <select id="" class="form-control custom-select" name="exudate">
+      <option selected>Select...</option>
+      <option>None </option>
+      <option>Light </option>
+      <option>Moderate</option>
+      <option>Heavy </option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <label class="mr-sm-2" for="inlineFormCustomSelect" > Odor</label>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="odor">
+        <option selected>Select...</option>
+        <option value="1">Absent</option>
+        <option value="2">Faint</option>
+        <option value="3">Moderate</option>
+        <option value="4"> Strong </option>
+        <option value="5"> Purulent</option>
+        <option value="6"> Foul</option>
+      </select>
+  </div>
+
+  <div class="form-group col-md-4">
+    <label class="mr-sm-2" for="inlineFormCustomSelect"> Peri-wound Color</label>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="periwound">
+        <option selected>Select...</option>
+        <option value="1"> Pale</option>
+        <option value="2">White</option>
+        <option value="3">Red</option>
+        <option value="4">Blue </option>
+        <option value="5">Darkened</option>
+
+      </select>
+  </div>
+
+
+  <div class="form-group col-md-4">
+    <label class="mr-sm-2" for="inlineFormCustomSelect">Wound Pain</label>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="woundpain">
+        <option selected>Select...</option>
+        <option value="1">No pain</option>
+        <option value="2">moderate pain</option>
+        <option value="3">Severe pains</option>
+
+
+      </select>
+  </div>
+
+
+  <div class="form-group col-md-4">
+    <label class="mr-sm-2" for="inlineFormCustomSelect">Peri-wound Integrity</label>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="woundintegrity">
+        <option selected>Select...</option>
+        <option value="1">Maceration</option>
+        <option value="2">Excoriation</option>
+        <option value="3">Erosion</option>
+        <option value="3">Edema present  </option>
+
+
+      </select>
+  </div>
+
+
+  <div class="form-group col-md-4">
+    <label class="mr-sm-2" for="inlineFormCustomSelect">Peri-wound Temperature</label>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="woundtemperature">
+        <option selected>Select...</option>
+        <option value="1">Warm</option>
+        <option value="2">Cold</option>
+      </select>
+  </div>
+
+
+  <div class="form-group col-md-4">
+    <label class="mr-sm-2" for="inlineFormCustomSelect">Peri-wound Texture</label>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="woundtexture">
+        <option selected>Select...</option>
+        <option value="1"> Moist</option>
+        <option value="2"> Dry</option>
+        <option value="3"> Boggy</option>
+        <option value="4"> Macerated</option>
+      </select>
+  </div>
+
+
+
+  <div class="form-group col-md-3 ">
+    <label for="inputPassword4">Weight</label>
+    <input type="text" class="form-control" id="" placeholder="weight" name="weight">
+  </div>
+  <div class="form-group col-md-6 ">
+    <label for="bmi">BMI</label>
+    <input type="text" class="form-control" id="" placeholder="BMI" name="bmi">
+  </div>
+
+  <div class="form-group col-md-3">
+    <label for="anotomic-location">Anatomic location</label>
+    <input type="text" class="form-control" id="" placeholder="Anotomic Location" name="anatomiclocation">
+  </div>
+
+</div>
+
+
+
+</div>
+
+  <div class="form-group col-md-4 row">
+    <label for="">Type of Tissue in the Wound Bed (select those that apply)</label>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <div class="d-block my-3">
+
+        <br>
+        <div class="custom-control custom-radio mb-3">
+          <input id="Factors" name="tissuetype"  type="checkbox" class="custom-control-input" onclick="showMe('div3', this)" required>
+          <label class="custom-control-label" for="Factors"> Granulation tissue </label>
+
+
+          <div class="container" style="display: none" id="div3">
+            <p class="mt-3 mb-1 text text-primary">Select all that Apply:</p>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+              <label class="form-check-label" for="inlineCheckbox1"> pink/ red</label>
+            </div>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+              <label class="form-check-label" for="inlineCheckbox2"> moist</label>
+            </div>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2">
+              <label class="form-check-label" for="inlineCheckbox3"> cobblestone-like appearance</label>
+            </div>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2">
+              <label class="form-check-label" for="inlineCheckbox4"> %</label>
+              <input type="text" name="" value="">
+            </div>
+          </div>
+        </div>
+        <div class="custom-control custom-radio mb-3">
+          <input id="Chest" name="paymentMethod" type="checkbox" class="custom-control-input" required>
+          <label class="custom-control-label" for="Chest">New epithelial tissue </label>
+        </div>
+        <div class="custom-control custom-radio mb-3">
+          <input id="Chest pain" name="paymentMethod" type="checkbox" class="custom-control-input" required>
+          <label class="custom-control-label" for="Chest pain">Non-adherent  thin yellow slough </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="d-block my-3">
+        <div class="custom-control custom-radio mb-3">
+          <input id="Dysponia" name="paymentMethod" type="checkbox" class="custom-control-input"  required>
+          <label class="custom-control-label" for="Dysponia">Loosely adherent thick or stringy yellow slough</label>
+        </div>
+        <div class="custom-control custom-radio mb-3">
+          <input id="Catarrh" name="paymentMethod" type="checkbox" class="custom-control-input" required>
+          <label class="custom-control-label" for="Catarrh">Adherent soft black eschar </label>
+        </div>
+
+
+
+        <div class="custom-control custom-radio mb-3">
+          <input id="Nose" name="paymentMethod" type="checkbox" class="custom-control-input" required>
+          <label class="custom-control-label" for="Nose">Necrotic, nonviable, or devitalized tissue </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="d-block my-3">
+        <div class="custom-control custom-radio mb-3">
+          <input id="Psychological" name="paymentMethod" type="checkbox" class="custom-control-input" onclick="showMe('div4', this)" required>
+          <label class="custom-control-label" for="Psychological">Firmly attached black eschar </label>
+
+          <div class="container" style="display: none" id="div4">
+            <p class="mt-3 mb-1 text text-primary">Select all that Apply:</p>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="Anger" value="option1">
+              <label class="form-check-label" for="Anger"> Anger</label>
+            </div>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="Fear" value="option2">
+              <label class="form-check-label" for="Fear"> Fear</label>
+            </div>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="Sadness" value="option2">
+              <label class="form-check-label" for="Sadness"> Sadness</label>
+            </div>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="Emotional Influence" value="option2">
+              <label class="form-check-label" for="Emotional Influence"> Emotional Influence</label>
+            </div>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="Others" value="option2">
+              <label class="form-check-label" for="Others"> Others</label>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <div class="col-4">
+      <div class="d-block my-3">
+        <div class="custom-control custom-radio mb-3">
+          <input id="clean" name="" type="checkbox" class="custom-control-input" onclick="showMe('div8', this)" required>
+          <label class="custom-control-label" for="clean">Clean, Non granulating tissue </label>
+
+          <div class="container" style="display: none" id="div8">
+            <p class="mt-3 mb-1 text text-primary">Select all that Apply:</p>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="Anger" value="option1">
+              <label class="form-check-label" for="Anger"> Anger</label>
+            </div>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="Fear" value="option2">
+              <label class="form-check-label" for="Fear"> Fear</label>
+            </div>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="Sadness" value="option2">
+              <label class="form-check-label" for="Sadness"> Sadness</label>
+            </div>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="Emotional Influence" value="option2">
+              <label class="form-check-label" for="Emotional Influence"> Emotional Influence</label>
+            </div>
+            <div class="form-check form-check-inline mb-1">
+              <input class="form-check-input" type="checkbox" id="Others" value="option2">
+              <label class="form-check-label" for="Others"> Others</label>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+
+
+  <div class="form-group  col-auto">
+<!--    <label for="woundView">Wound View</label>-->
+<!--    <input type="file" accept=".jpg, .jpeg, .png, .svg, .gif" id="" name="woundview">-->
+<!--    <input type="submit">-->
+<!--  </div>-->
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary">Register Patient</button>
+    </div>
+  </div>
+
+
+
+
+
+</form>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
