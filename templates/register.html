@@ -71,11 +71,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
-            {% if msg_sent: %}
-            <h1>Successfully sent your message</h1>
-            {% else: %}
-            <h1></h1>
-            {% endif %}
+
 <!--            <span class="subheading">Have questions? I have answers.</span>-->
           </div>
         </div>
@@ -89,19 +85,30 @@
   <section>
 
 
-    <form action="{{ url_for('register_data') }}" method="post" novalidate>
+{% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+         <p>{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+
+
+
+    <form action="{{ url_for('register_data') }}" method="post" >
 
         <div class="form-group floating-label-form-group controls row">
           <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Full Names</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control form-control-sm" id="fullname" name="fullname" placeholder="e.g mustafa " required data-validation-required-message="Please enter your full name.">
+            <input type="text" class="form-control form-control-sm" id="fullname" name="fullname" placeholder="e.g mustafa " required>
           </div>
         </div>
 
       <div class="form-group row">
         <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Date Of Birth</label>
         <div class="col-sm-10">
-          <input type="datetime-local" class="form-control form-control-sm" id="" name="dob" placeholder="e.g 01-01-2020" required data-validation-required-message="Please enter your date of birth.">
+          <input type="datetime-local" class="form-control form-control-sm" id="" name="dob" placeholder="e.g 01-01-2020" required >
         </div>
       </div>
 
@@ -109,35 +116,35 @@
       <div class="form-group row">
         <label for="user name" class="col-sm-2 col-form-label col-form-label-sm">Username</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control form-control-sm" id="username" name="username" placeholder="e.g daniel" required data-validation-required-message="Please enter your username">
+          <input type="text" class="form-control form-control-sm" id="username" name="username" placeholder="e.g daniel" required >
         </div>
       </div>
 
       <div class="form-group row">
         <label for="Password " class="col-sm-2 col-form-label col-form-label-sm">password</label>
         <div class="col-sm-10">
-          <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="@-123ert" required data-validation-required-message="Please enter your password.">
+          <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="@-123ert" required >
         </div>
       </div>
 
       <div class="form-group row">
         <label for="Card " class="col-sm-2 col-form-label col-form-label-sm">ID card Number</label>
         <div class="col-sm-10">
-          <input type="number" class="form-control form-control-sm" id="cardNumber" name="cardnumber" placeholder="e.g 001100200" required data-validation-required-message="Please enter your card number.">
+          <input type="number" class="form-control form-control-sm" id="cardNumber" name="cardnumber" placeholder="e.g 001100200" required >
         </div>
       </div>
 
       <div class="form-group row">
         <label for="Gender " class="col-sm-2 col-form-label col-form-label-sm">Gender</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control form-control-sm" id="gender" name="gender" placeholder="e.g male " required data-validation-required-message="Please enter your gender.">
+          <input type="text" class="form-control form-control-sm" id="gender" name="gender" placeholder="e.g male " required >
         </div>
       </div>
 
       <div class="form-group row">
         <label for="Email " class="col-sm-2 col-form-label col-form-label-sm">Email</label>
         <div class="col-sm-10">
-          <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder=" email address" required data-validation-required-message="Please enter your email.">
+          <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder=" email address" required >
         </div>
       </div>
 
@@ -145,7 +152,7 @@
       <div class="form-group row">
         <label for="height " class="col-sm-2 col-form-label col-form-label-sm">Height</label>
         <div class="col-sm-10">
-          <input type="number" class="form-control form-control-sm" id="" name="height" placeholder="e.g 17.7" required data-validation-required-message="Please enter your height.">
+          <input type="number" class="form-control form-control-sm" id="" name="height" placeholder="e.g 17.7" required >
         </div>
       </div>
 
@@ -153,7 +160,7 @@
       <div class="form-group row">
         <label for="Medical History " class="col-sm-2 col-form-label col-form-label-sm">Past Medical History </label>
         <div class="col-sm-10">
-          <input type="text" class="form-control form-control-sm" id="" name="history" placeholder="e.g cough, fever" required data-validation-required-message="Please enter your medical history.">
+          <input type="text" class="form-control form-control-sm" id="" name="history" placeholder="e.g cough, fever" required >
         </div>
       </div>
 
@@ -168,6 +175,8 @@
 
 
   </section>
+
+
 
 </div>
 

@@ -184,8 +184,8 @@ def receive_data():
 @app.route('/secrets')
 @login_required
 def secrets():
-    name=(current_user.name)
-    return render_template("secrets.html", name=name)
+    print(current_user.username)
+    return render_template("login2.html", name=current_user.username)
 
 
 
@@ -236,6 +236,12 @@ def login():
 @app.route("/register-user", methods=["POST", "GET"])
 def register_data():
         if request.method == "POST":
+
+            if User.query.filter_by(email=request.form.get('email')).first():
+                # User already exists
+                flash("You've already signed up with that email, log in instead!")
+                return redirect(url_for('login'))
+
             hash_and_salted_password = generate_password_hash(
                 request.form.get('password'),
                 method='pbkdf2:sha256',
@@ -318,6 +324,27 @@ def delete():
     db.session.delete(patient_to_delete)
     db.session.commit()
     return redirect(url_for('home'))
+
+
+@app.route('/loginn', methods=["GET", "POST"])
+def loginn():
+    register_form = RegisterForm()
+    if request.method == "POST":
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        # Find user by email entered.
+        user = User.query.filter_by(email=email).first()
+
+        # Check stored password hash against entered password hashed.
+        if check_password_hash(user.password, password):
+            login_user(user)
+            return redirect(url_for('secrets'))
+
+    return render_template("login2.html", form=register_form)
+
+
+
 
 
 

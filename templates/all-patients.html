@@ -9,15 +9,51 @@
 {% for wound in wounds %}
 
 <div class="container fluid col-md-9" >
-    <form>
+    <form >
         <div class="row ">
         <div class="col-md-12 form-control form-control-md">
+
             {{ wound.exudate_amount.label }} <br> {{ wound.weight}}<br>
      <a href="{{ url_for('delete', id=wounds.id) }}" class="button">Delete</a>
-            {{ wound.exudate_amount }}, {{wound.type_of_tissue}}, {{wound.tissue_loss}},
-            {{ wound.odor }}, {{ wound.edges }}, {{ wound.weight }}, {{ wound.peri_wound }}
-            {{wound.wound_integrity}}, {{wound.wound_temperature}}, {{wound.wound_texture}},
-            {{wound.wound_pain}}, {{wound.weight}}, {{wound.bmi}}, {{wound.anatomic_location}}
+
+                 <label for="Exudate" class="col-sm-3 col-form-label col-form-label-sm">Exudate Amount</label>
+            <a>{{ wound.exudate_amount }},</a> <br>
+
+            <label for="Edges" class="col-sm-3 col-form-label col-form-label-sm">Edges</label>
+            <a>{{ wound.edges }}</a> <br>
+            <label for="tissuetype" class="col-sm-3 col-form-label col-form-label-sm">Type of Tissue in Wound Bed</label>
+            <a>{{wound.type_of_tissue}}</a><br>
+
+            <label for="TissueLoss" class="col-sm-3 col-form-label col-form-label-sm">Extent of tissue loss</label>
+            <a>{{wound.tissue_loss}}</a><br>
+
+            <label for="Odor" class="col-sm-3 col-form-label col-form-label-sm">Odor</label>
+            <a>{{ wound.odor }} </a><br>
+
+            <label for="Weight" class="col-sm-3 col-form-label col-form-label-sm">Weight</label>
+            <a>{{ wound.weight }} </a><br>
+
+            <label for="PeriWound" class="col-sm-3 col-form-label col-form-label-sm">Peri Wound Color</label>
+            <a>{{ wound.peri_wound }}</a><br>
+
+            <label for="WoundIntegrity" class="col-sm-3 col-form-label col-form-label-sm">Peri-Wound Integrity</label>
+            <a>{{wound.wound_integrity}}</a><br>
+
+            <label for="WoundTemperature" class="col-sm-3 col-form-label col-form-label-sm">Peri-Wound Temperature</label>
+            <a>{{wound.wound_temperature}}</a><br>
+
+            <label for="WoundTexture" class="col-sm-3 col-form-label col-form-label-sm">Peri Wound Texture</label>
+            <a>{{wound.wound_texture}}</a><br>
+
+            <label for="WoundPain" class="col-sm-3 col-form-label col-form-label-sm">Wound Pain</label>
+            <a>{{wound.wound_pain}}</a><br>
+
+            <label for="BMI" class="col-sm-3 col-form-label col-form-label-sm">BMI</label>
+            <a>{{wound.bmi}}</a><br>
+
+            <label for="AnatomicLocation" class="col-sm-3 col-form-label col-form-label-sm">Anatomic location</label>
+            {{wound.anatomic_location}}
+
     <a href="{{ url_for('edit', id=wounds.id) }}" class="button">Edit Patient</a>
         </div>
 
@@ -40,7 +76,7 @@
     </form>
 
 
-{% include "footer.html"%}
+
 
     </div>
 
@@ -49,6 +85,15 @@
  {% endfor %}
 </div>
 
+<div style="
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-left: 500px;
+    class="container-fluid bottom_page">
+    {% include "footer.html"%}
+</div>
+
 
 {% endblock %}
+
 
