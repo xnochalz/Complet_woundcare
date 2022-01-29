@@ -31,38 +31,56 @@
 
 <!--    {{ use }}-->
 
-        <form class="" action="/login" method="post" >
+     {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+         <p>{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 
 
 
-        <div class="row">
+        <form class="" action="/login" method="post" style="margin-top: 60px;" >
 
-          <div class="pricing-column col-lg-4 col-md-6">
-        <div class="card">
-          <div class="card-header">
+            <label>Email</label>
+        <input type="email" name="email" placeholder="Email" required="required"/>
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Password" required="required"/><br>
 
-          </div>
-          <div class="card-body login-card" >
-
-                {{ form.csrf_token }}
-				{{ form.email.label }} <br> {{ form.email(size=30) }}
-              {% for err in form.email.errors %}
-        <span style="color:red">{{ err }}</span>
-        {% endfor %} <br>
-				{{ form.password.label }} <br>  {{ form.password(size=30) }}
-
-              {% for err in form.password.errors %}
-        <span style="color:red">{{ err }}</span>
-        {% endfor %} <br>
-              <br>
-				<input type="submit" value="Let me In">
-
-          </div>
-        </div>
-      </div>
+        <button type="submit" class="btn btn-outline-primary btn-sm download-button">Log Me in</button>
 
 
-        </div>
+
+
+<!--        <div class="row">-->
+
+<!--          <div class="pricing-column col-lg-4 col-md-6">-->
+<!--        <div class="card">-->
+<!--          <div class="card-header">-->
+
+<!--          </div>-->
+<!--          <div class="card-body login-card" >-->
+
+<!--                {{ form.csrf_token }}-->
+<!--				{{ form.email.label }} <br> {{ form.email(size=30) }}-->
+<!--              {% for err in form.email.errors %}-->
+<!--        <span style="color:red">{{ err }}</span>-->
+<!--        {% endfor %} <br>-->
+<!--				{{ form.password.label }} <br>  {{ form.password(size=30) }}-->
+
+<!--              {% for err in form.password.errors %}-->
+<!--        <span style="color:red">{{ err }}</span>-->
+<!--        {% endfor %} <br>-->
+<!--              <br>-->
+<!--				<input type="submit" value="Let me In">-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--        </div>-->
   </form>
 <hr>
 

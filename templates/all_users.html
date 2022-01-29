@@ -11,7 +11,7 @@
 
 
 
-<div class="container fluid col-md-9 ">
+<div class="container fluid col-md-9 " >
     <form>
 
             <div class="row">
@@ -50,10 +50,7 @@
                 <label for="Email" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
                 {{user.email}}
             </div>
-            <div class="col-md-12 form-group">
-                <label for="Password" class="col-sm-2 col-form-label col-form-label-sm">Password</label>
-                {{user.password}}
-            </div>
+
     <a href="{{ url_for('edit', id=users.id) }}" class="button">Edit User</a>
         </div>
         </div>

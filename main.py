@@ -102,6 +102,16 @@ class CreatePatient(db.Model):
 # # Create all the tables in the database
 db.create_all()
 
+##CREATE TABLE IN DB
+class Uzers(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(100))
+    name = db.Column(db.String(1000))
+
+# # Create all the tables in the database
+db.create_all()
+
 # #CREATE RECORD
 # new_wound = User( email="admin@gmail.com", password="123456", username="gee", Cardnumber="0123456", fullname="yes men")
 # db.session.add(new_wound)
@@ -125,11 +135,11 @@ def admin_only(f):
 def home():
     all_users = db.session.query(User).all()
     # wound_patients = CreatePatient.query.all()
-    return render_template('index.html', users=all_users)
+    return render_template('index.html', users=all_users, logged_in=current_user.is_authenticated)
 
 
 @app.route('/all')
-
+# @login_required
 def all_patients():
     # all_patients = db.session.query(CreatePatient).all()
     wound_patients = CreatePatient.query.all()
@@ -153,15 +163,90 @@ def show():
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
+    form = LoginForm()
+    if request.method == "POST":
 
-    register_form = RegisterForm()
-    if register_form.validate_on_submit():
-        if register_form.email.data == "" and register_form.password.data == "":
-            return render_template("reports.html")
+        #If user's email already exists
+        if Uzers.query.filter_by(email=form.email.data).first():
+            #Send flash messsage
+            flash("You've already signed up with that email, log in instead!")
+            #Redirect to /login route.
+            return redirect(url_for('login'))
+
+
+        hash_and_salted_password = generate_password_hash(
+            request.form.get('password'),
+            method='pbkdf2:sha256',
+            salt_length=8
+        )
+
+
+        new_user = Uzers(
+            email=request.form.get('email'),
+            name=request.form.get('name'),
+            password=hash_and_salted_password
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        # Log in and authenticate user after adding details to database.
+        login_user(new_user)
+
+        return redirect(url_for("login"))
+
+    return render_template("registerr.html", form=form)
+    #
+    # register_form = RegisterForm()
+    # if register_form.validate_on_submit():
+    #     if register_form.email.data == "" and register_form.password.data == "":
+    #         return render_template("reports.html")
+    #     else:
+    #         return render_template("login.html")
+    #
+    # return render_template("register2.html", form=register_form)
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    login_form = LoginForm()
+    if request.method == "POST":
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        user = Uzers.query.filter_by(email=email).first()
+        # Email doesn't exist
+        if not user:
+            flash("That email does not exist, please try again.")
+            return redirect(url_for('login'))
+        # Password incorrect
+        elif not check_password_hash(user.password, password):
+            flash('Password incorrect, please try again.')
+            return redirect(url_for('login'))
+        # Email exists and password correct
         else:
-            return render_template("login.html")
+            login_user(user)
 
-    return render_template("register2.html", form=register_form)
+    # login_form = LoginForm()
+    # if request.method == "POST":
+    #     email = request.form.get('email')
+    #     password = request.form.get('password')
+    #
+    #     # Find user by email entered.
+    #     user = Uzers.query.filter_by(email=email).first()
+    #
+    #     # Check stored password hash against entered password hashed.
+    #     if check_password_hash(user.password, password):
+    #         login_user(user)
+
+            # login_form = LoginForm()
+            # if login_form.validate_on_submit():
+            #     if login_form.email.data == "admin@email.com" and login_form.password.data == "12345678":
+            #         return render_template("reports.html")
+            #     else:
+            return redirect(url_for('add_patient'))
+    return render_template('login.html', form=login_form)
+
+
 
 @app.route("/form-entry", methods=["POST"])
 def receive_data():
@@ -182,10 +267,10 @@ def receive_data():
         return render_template("register.html", msg_sent=False)
 
 @app.route('/secrets')
-@login_required
+# @login_required
 def secrets():
-    print(current_user.username)
-    return render_template("login2.html", name=current_user.username)
+    # print(current_user.name)
+    return render_template("secrets.html")
 
 
 
@@ -210,27 +295,6 @@ def send_email(name, email, phone, message):
         connection.sendmail(OWN_EMAIL, OWN_EMAIL, email_message)
 
 
-@app.route('/login', methods=["GET", "POST"])
-def login():
-    login_form = LoginForm()
-    if request.method == "POST":
-        email = request.form.get('email')
-        password = request.form.get('password')
-
-        # Find user by email entered.
-        user = User.query.filter_by(email=email).first()
-
-        # Check stored password hash against entered password hashed.
-        if check_password_hash(user.password, password):
-            login_user(user)
-
-            # login_form = LoginForm()
-            # if login_form.validate_on_submit():
-            #     if login_form.email.data == "admin@email.com" and login_form.password.data == "12345678":
-            #         return render_template("reports.html")
-            #     else:
-            return redirect(url_for('secrets'))
-    return render_template('login.html', form=login_form)
 
 
 @app.route("/register-user", methods=["POST", "GET"])
@@ -249,7 +313,7 @@ def register_data():
             )
             # CREATE RECORD
             new_user = User(
-                Full_name=request.form["fullname"],
+                Full_name=request.form["name"],
 
                 username=request.form["username"],
                 email=request.form["email"],
@@ -267,7 +331,7 @@ def register_data():
             # Log in and authenticate user after adding details to database.
             login_user(new_user)
 
-            return redirect(url_for('users'))
+            return redirect(url_for('login'))
 
         return render_template("register.html")
 
@@ -302,7 +366,9 @@ def add_patient():
 
 
 @app.route("/edit", methods=["GET", "POST"])
+@login_required
 def edit():
+
     if request.method == "POST":
         # UPDATE RECORD
         patient_id = request.form["id"]
@@ -316,7 +382,9 @@ def edit():
 
 
 
+
 @app.route("/delete")
+@login_required
 def delete():
     patient_id = request.args.get('id')
     # DELETE A RECORD BY ID
@@ -328,21 +396,39 @@ def delete():
 
 @app.route('/loginn', methods=["GET", "POST"])
 def loginn():
-    register_form = RegisterForm()
-    if request.method == "POST":
-        email = request.form.get('email')
-        password = request.form.get('password')
+    form = LoginForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
 
-        # Find user by email entered.
         user = User.query.filter_by(email=email).first()
 
-        # Check stored password hash against entered password hashed.
-        if check_password_hash(user.password, password):
+        if user and check_password_hash(user.password, password):
             login_user(user)
-            return redirect(url_for('secrets'))
+            return redirect(url_for('add_patient'))
 
-    return render_template("login2.html", form=register_form)
+    return render_template("login.html", form=form)
 
+
+
+    # register_form = RegisterForm()
+    # if request.method == "POST":
+    #     email = request.form.get('email')
+    #     password = request.form.get('password')
+    #
+    #     # Find user by email entered.
+    #     user = User.query.filter_by(email=email).first()
+    #
+    #     # Check stored password hash against entered password hashed.
+    #     if check_password_hash(user.password, password):
+    #         login_user(user)
+    #         return redirect(url_for('secrets'))
+    #
+    # return render_template("login2.html", form=register_form)
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('all_patients'))
 
 
 

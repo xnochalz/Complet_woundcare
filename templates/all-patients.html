@@ -9,7 +9,7 @@
 {% for wound in wounds %}
 
 <div class="container fluid col-md-9" >
-    <form >
+    <form style="width: 100%; ">
         <div class="row ">
         <div class="col-md-12 form-control form-control-md">
 
@@ -52,7 +52,7 @@
             <a>{{wound.bmi}}</a><br>
 
             <label for="AnatomicLocation" class="col-sm-3 col-form-label col-form-label-sm">Anatomic location</label>
-            {{wound.anatomic_location}}
+            {{wound.anatomic_location}} <br>
 
     <a href="{{ url_for('edit', id=wounds.id) }}" class="button">Edit Patient</a>
         </div>

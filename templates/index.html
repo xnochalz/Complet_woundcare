@@ -20,22 +20,22 @@
 </head>
 <body >
 
-  <section class="colored-section" id="title">
+  <section class="colored-section " id="title">
 
-    <div class="container-fluid">
+    <div class="">
 
       <!-- Nav Bar -->
 
-      <nav class="navbar navbar-expand-lg navbar-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark container-fluid ">
 
         <!-- <img class="title-image" src="images/logo.png" alt="firsr_aid"> -->
 
-        <a class="navbar-brand" href="">WOUNDCARE
+        <a class="navbar-brand  " href="">WOUNDCARE
         </a>
 
 
-        <div class="container-fluid register">
-          <h3 class="reg_heading">WELCOME</h3>
+        <div class=" container-fluid register">
+          <h3 class="reg_heading ">WELCOME</h3>
         </div>
 
         <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
@@ -46,14 +46,23 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 
           <ul class="navbar-nav ml-auto">
+             {% if not logged_in: %}
+              {% if not current_user.is_authenticated: %}
             <li class="nav-item">
-              <a  href="{{ url_for('register_data') }}" class="nav-link" href="#footer"><button type="button" class="btn btn-outline-primary btn-sm download-button">Register</a>
+              <a  href="{{ url_for('register_data') }}" class="nav-link" href="#"><button type="button" class="btn btn-outline-primary btn-sm download-button">Register</a>
               </button>
             </li>
+            {% else: %}
             <li class="nav-item">
-              <a href="{{ url_for('login') }}" class="nav-link" href="#pricing"><button type="button" class="btn btn-outline-primary btn-sm download-button">Login</a>
+              <a href="{{ url_for('login') }}" class="nav-link" href="#"><button type="button" class="btn btn-outline-primary btn-sm download-button">Login</a>
               </button>
             </li>
+
+
+            {% endif %}
+
+
+            {% endif %}
 
 
           </ul>
