@@ -96,78 +96,113 @@
 
 
 
-    <form action="{{ url_for('register_data') }}" method="post" >
+    <form action="{{ url_for('register_data') }}" method="post" style="width: 2000px;">
 
-        <div class="form-group floating-label-form-group controls row">
-          <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Full Names</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control form-control-sm" id="fullname" name="name" placeholder="e.g mustafa " required>
-          </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label col-form-label-sm">Name</label><br>
+            <div class="col-sm-6">
+                <input class="form-control form-control-md" type="text" name="name" placeholder="Name" required="required"/><br>
+            </div>
+
+        </div>
+        <div class="form-group row">
+                <label class="col-sm-2 col-form-label col-form-label-sm">Password</label><br>
+            <div class="col-sm-6">
+                <input class="form-control form-control-md" type="password" name="password" placeholder="Password" required="required"/><br>
+            </div>
+        </div>
+        <div class="form-group row">
+                <label class="col-sm-2 col-form-label col-form-label-sm">Email</label><br>
+            <div class="col-sm-6">
+                <input class="form-control form-control-md" type="email" name="email" placeholder="Email" required="required"/><br>
+            </div>
         </div>
 
-      <div class="form-group row">
-        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Date Of Birth</label>
-        <div class="col-sm-10">
-          <input type="datetime-local" class="form-control form-control-sm" id="" name="dob" placeholder="e.g 01-01-2020" required >
+
+
+        <div style="width: 1400px;">
+            <button type="submit" class="btn btn-primary btn-sm download-button">Register Me</button><br>
         </div>
-      </div>
 
 
-      <div class="form-group row">
-        <label for="user name" class="col-sm-2 col-form-label col-form-label-sm">Username</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control form-control-sm" id="username" name="username" placeholder="e.g daniel" required >
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="Password " class="col-sm-2 col-form-label col-form-label-sm">password</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="@-123ert" required >
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="Card " class="col-sm-2 col-form-label col-form-label-sm">ID card Number</label>
-        <div class="col-sm-10">
-          <input type="number" class="form-control form-control-sm" id="cardNumber" name="cardnumber" placeholder="e.g 001100200" required >
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="Gender " class="col-sm-2 col-form-label col-form-label-sm">Gender</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control form-control-sm" id="gender" name="gender" placeholder="e.g male " required >
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="Email " class="col-sm-2 col-form-label col-form-label-sm">Email</label>
-        <div class="col-sm-10">
-          <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder=" email address" required >
-        </div>
-      </div>
 
 
-      <div class="form-group row">
-        <label for="height " class="col-sm-2 col-form-label col-form-label-sm">Height</label>
-        <div class="col-sm-10">
-          <input type="number" class="form-control form-control-sm" id="" name="height" placeholder="e.g 17.7" required >
-        </div>
-      </div>
 
 
-      <div class="form-group row">
-        <label for="Medical History " class="col-sm-2 col-form-label col-form-label-sm">Past Medical History </label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control form-control-sm" id="" name="history" placeholder="e.g cough, fever" required >
-        </div>
-      </div>
 
 
-      <div class="form-example">
-          <button type="submit" class="btn btn-primary mb-2">Register Me</button>
-        </div>
+
+
+<!--        <div class="form-group floating-label-form-group controls row">-->
+<!--          <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Full Names</label>-->
+<!--          <div class="col-sm-10">-->
+<!--            <input type="text" class="form-control form-control-sm" id="fullname" name="name" placeholder="e.g mustafa " required>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--      <div class="form-group row">-->
+<!--        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Date Of Birth</label>-->
+<!--        <div class="col-sm-10">-->
+<!--          <input type="datetime-local" class="form-control form-control-sm" id="" name="dob" placeholder="e.g 01-01-2020" required >-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--      <div class="form-group row">-->
+<!--        <label for="user name" class="col-sm-2 col-form-label col-form-label-sm">Username</label>-->
+<!--        <div class="col-sm-10">-->
+<!--          <input type="text" class="form-control form-control-sm" id="username" name="username" placeholder="e.g daniel" required >-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="form-group row">-->
+<!--        <label for="Password " class="col-sm-2 col-form-label col-form-label-sm">password</label>-->
+<!--        <div class="col-sm-10">-->
+<!--          <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="@-123ert" required >-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="form-group row">-->
+<!--        <label for="Card " class="col-sm-2 col-form-label col-form-label-sm">ID card Number</label>-->
+<!--        <div class="col-sm-10">-->
+<!--          <input type="number" class="form-control form-control-sm" id="cardNumber" name="cardnumber" placeholder="e.g 001100200" required >-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="form-group row">-->
+<!--        <label for="Gender " class="col-sm-2 col-form-label col-form-label-sm">Gender</label>-->
+<!--        <div class="col-sm-10">-->
+<!--          <input type="text" class="form-control form-control-sm" id="gender" name="gender" placeholder="e.g male " required >-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="form-group row">-->
+<!--        <label for="Email " class="col-sm-2 col-form-label col-form-label-sm">Email</label>-->
+<!--        <div class="col-sm-10">-->
+<!--          <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder=" email address" required >-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--      <div class="form-group row">-->
+<!--        <label for="height " class="col-sm-2 col-form-label col-form-label-sm">Height</label>-->
+<!--        <div class="col-sm-10">-->
+<!--          <input type="number" class="form-control form-control-sm" id="" name="height" placeholder="e.g 17.7" required >-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--      <div class="form-group row">-->
+<!--        <label for="Medical History " class="col-sm-2 col-form-label col-form-label-sm">Past Medical History </label>-->
+<!--        <div class="col-sm-10">-->
+<!--          <input type="text" class="form-control form-control-sm" id="" name="history" placeholder="e.g cough, fever" required >-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--      <div class="form-example">-->
+<!--          <button type="submit" class="btn btn-primary mb-2">Register Me</button>-->
+<!--        </div>-->
 
 
 

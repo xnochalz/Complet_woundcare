@@ -14,7 +14,7 @@
         <div class="col-md-12 form-control form-control-md">
 
 <!--            {{ wound.exudate_amount.label }} <br> {{ wound.weight}}<br>-->
-     <a href="{{ url_for('delete', id=wounds.id) }}" class="button">Delete</a>
+     <a href="{{ url_for('delete', id=wounds.id) }}" class="button">Delete</a><br>
 
                  <label for="Exudate" class="col-sm-3 col-form-label col-form-label-sm">Exudate Amount</label>
             <a>{{ wound.exudate_amount }},</a> <br>
@@ -57,8 +57,58 @@
     <a href="{{ url_for('edit', id=wounds.id) }}" class="button">Edit Patient</a>
         </div>
 
+<section>
+       {% for wound in wounds %}
+
+<!--     # IF statement to differentiate Add and Edit-->
+            {% if is_edit: %}
+            <h1>Edit Patient</h1>
+            {% else: %}
+            <h1>New Patient</h1>
+            {% endif %}
+
+    <a href="{{ url_for('all_patients', post_id=wound.id) }}">
+    <h2 class="post-title">
+              {{wound.tissue_loss}}
+            </h2>
+<h3 class="post-subtitle">
+              {{wound.wound_pain}}
+            </h3>
+          </a>
+          <p class="post-meta">Created by
+            {{wound.anatomic_location}}
+            on {{wound.date}}
+
+<!--        If user id is 1 then they can see the delete button -->
+            {% if current_user.id == 1: %}
+            <a href="{{url_for('delete_post', post_id=wound.id) }}">✘</a>
+            {% endif %}
+
+          </p>
+        </div>
+        {% endfor %}
 
 
+        <!-- New Post -->
+<!--    If user id is 1 then they can see the Create New Post button -->
+        {% if current_user.id == 1: %}
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="{{url_for('add_patient')}}">Add new Patient</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <hr>
+
+
+<!--If user id is 1 then they can see the Edit Post button &ndash;&gt;-->
+          {% if current_user.id == 1 %}
+           <div class="clearfix">
+          <a class="btn btn-primary float-right" href="{{url_for('edit_post', post_id=wound.id)}}">Edit Patient</a>
+          </div>
+          {% endif %}
+</section>
 
 
 
@@ -85,11 +135,17 @@
  {% endfor %}
 </div>
 
+
+
 <div style="
     padding-top: 30px;
     padding-bottom: 30px;
     margin-left: 500px;
     class="container-fluid bottom_page">
+
+  <div>
+    <a class="nav-link" href="{{ url_for('add_patient') }}"><button type="button" class="btn btn-dark btn-sm btn-outline-primary download-button">Add Patient</a>
+  </div>
     {% include "footer.html"%}
 </div>
 

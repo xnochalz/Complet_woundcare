@@ -61,15 +61,21 @@ def load_user(user_id):
 class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    Full_name = db.Column(db.String(100), nullable=False)
-    username = db.Column(db.String(100), nullable=False)
-    Gender = db.Column(db.String(100), nullable=False)
-    Date_of_birth = db.Column(db.String(100), nullable=False)
-    Card_number = db.Column(db.String(100), nullable=False)
-    Height = db.Column(db.String(100), nullable=False)
-    Medical_History = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
-    password = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(100))
+    name = db.Column(db.String(1000))
+
+    # id = db.Column(db.Integer, primary_key=True)
+    # Full_name = db.Column(db.String(100), nullable=False)
+    # username = db.Column(db.String(100), nullable=False)
+    # Gender = db.Column(db.String(100), nullable=False)
+    # Date_of_birth = db.Column(db.String(100), nullable=False)
+    # Card_number = db.Column(db.String(100), nullable=False)
+    # Height = db.Column(db.String(100), nullable=False)
+    # Medical_History = db.Column(db.String(100), nullable=False)
+    # email = db.Column(db.String(100), nullable=False)
+    # password = db.Column(db.String(100), nullable=False)
+
 
 
 
@@ -145,12 +151,55 @@ def all_patients():
     wound_patients = CreatePatient.query.all()
     return render_template('all-patients.html', wounds=wound_patients)
 
+
+@app.route("/post/<int:post_id>")
+def edit_post(post_id):
+    post = CreatePatient.query.get(post_id)
+    edit_form = AddPatient(
+        Clinic_Visit=post.Clinic_Visit,
+        tissue_loss=post.tissue_loss,
+        edges=post.edges,
+        exudate_amount=post.exudate_amount,
+        odor=post.odor,
+        peri_wound=post.peri_wound ,
+        wound_pain=post.wound_pain,
+        wound_integrity=post.wound_integrity,
+        wound_temperature=post.wound_temperature,
+        wound_texture=post.wound_texture,
+        weight=post.weight,
+        bmi=post.bmi,
+        anatomic_location=post.anatomic_location,
+        type_of_tissue=post.type_of_tissue,
+    )
+    if edit_form.validate_on_submit():
+        post.Clinic_Visit = edit_form.Clinic_Visit.data
+        post.tissue_loss = edit_form.tissue_loss.data
+        post.edges = edit_form.edges.data
+        post.exudate_amount = edit_form.exudate_amount.data
+        post.odor = edit_form.odor.data
+        post.peri_wound = edit_form.peri_wound.data
+        post.wound_pain = edit_form.wound_pain.data
+        post.wound_integrity = edit_form.wound_integrity.data
+        post.wound_temperature = edit_form.wound_temperature.data
+        post.wound_texture = edit_form.wound_texture.data
+        post.weight = edit_form.weight.data
+        post.bmi = edit_form.bmi.data
+        post.anatomic_location = edit_form.anatomic_location.data
+        post.type_of_tissue = edit_form.type_of_tissue.data
+        db.session.commit()
+        return redirect(url_for("all-patients", post_id=post.id))
+    return render_template("all-patients.html", form=edit_form, is_edit=True)
+    # requested_patient = CreatePatient.query.get(post_id)
+    # return render_template("all-patients.html", wounds=requested_patient)
+
+
 @app.route('/users')
 # @login_required
 def users():
     all_users = db.session.query(User).all()
+    all_uzers = db.session.query(Uzers).all()
     # wound_patients = CreatePatient.query.all()
-    return render_template('all_users.html', users=all_users)
+    return render_template('all_users.html', users=all_users, uzers=all_uzers)
 
 
 
@@ -299,41 +348,74 @@ def send_email(name, email, phone, message):
 
 @app.route("/register-user", methods=["POST", "GET"])
 def register_data():
-        if request.method == "POST":
+    form = LoginForm()
+    if request.method == "POST":
 
-            if User.query.filter_by(email=request.form.get('email')).first():
-                # User already exists
-                flash("You've already signed up with that email, log in instead!")
-                return redirect(url_for('login'))
-
-            hash_and_salted_password = generate_password_hash(
-                request.form.get('password'),
-                method='pbkdf2:sha256',
-                salt_length=8
-            )
-            # CREATE RECORD
-            new_user = User(
-                Full_name=request.form["name"],
-
-                username=request.form["username"],
-                email=request.form["email"],
-                Gender=request.form["gender"],
-                Date_of_birth=request.form["dob"],
-                Height=request.form["height"],
-                Medical_History=request.form["history"],
-                Card_number=request.form["cardnumber"],
-                password=hash_and_salted_password
-
-            )
-            db.session.add(new_user)
-            db.session.commit()
-
-            # Log in and authenticate user after adding details to database.
-            login_user(new_user)
-
+        # If user's email already exists
+        if Uzers.query.filter_by(email=form.email.data).first():
+            # Send flash messsage
+            flash("You've already signed up with that email, log in instead!")
+            # Redirect to /login route.
             return redirect(url_for('login'))
 
-        return render_template("register.html")
+        hash_and_salted_password = generate_password_hash(
+            request.form.get('password'),
+            method='pbkdf2:sha256',
+            salt_length=8
+        )
+
+        new_user = Uzers(
+            email=request.form.get('email'),
+            name=request.form.get('name'),
+            password=hash_and_salted_password
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        # Log in and authenticate user after adding details to database.
+        login_user(new_user)
+
+        return redirect(url_for("login"))
+
+    return render_template("register.html", form=form)
+    #
+
+        # if request.method == "POST":
+        #
+        #     if User.query.filter_by(email=request.form.get('email')).first():
+        #         # User already exists
+        #         flash("You've already signed up with that email, log in instead!")
+        #         return redirect(url_for('login'))
+        #
+        #     hash_and_salted_password = generate_password_hash(
+        #         request.form.get('password'),
+        #         method='pbkdf2:sha256',
+        #         salt_length=8
+        #     )
+        #     # CREATE RECORD
+        #     new_user = User(
+        #         Full_name=request.form["name"],
+        #
+        #         username=request.form["username"],
+        #         email=request.form["email"],
+        #         Gender=request.form["gender"],
+        #         Date_of_birth=request.form["dob"],
+        #         Height=request.form["height"],
+        #         Medical_History=request.form["history"],
+        #         Card_number=request.form["cardnumber"],
+        #         password=hash_and_salted_password
+        #
+        #     )
+        #     db.session.add(new_user)
+        #     db.session.commit()
+        #
+        #     # Log in and authenticate user after adding details to database.
+        #     login_user(new_user)
+        #
+        #     return redirect(url_for('login'))
+        #
+        # return render_template("register.html")
 
 @app.route("/add", methods=["GET", "POST"])
 # @login_required
