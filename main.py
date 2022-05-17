@@ -8,6 +8,7 @@ from flask_ckeditor import CKEditor
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_gravatar import Gravatar
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import relationship
 from forms import LoginForm, RegisterForm, AddPatient
 from wtforms import StringField, SubmitField, PasswordField, SelectField, validators
 import os
@@ -56,6 +57,21 @@ def load_user(user_id):
 # db = sqlite3.connect("woundcare.db")
 
 
+##CREATE TABLE IN DB
+class Uzers(UserMixin, db.Model):
+    __tablename__ = "uzers"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(100))
+    name = db.Column(db.String(1000))
+    patients = relationship("CreatePatient", back_populates="Clinic_Visit")
+
+# # Create all the tables in the database
+db.create_all()
+
+
+
+
 
 # Create the User Table
 class User(UserMixin, db.Model):
@@ -64,6 +80,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
+    # patients = relationship("CreatePatient", back_populates="Clinic_Visit")
 
     # id = db.Column(db.Integer, primary_key=True)
     # Full_name = db.Column(db.String(100), nullable=False)
@@ -88,7 +105,10 @@ db.create_all()
 class CreatePatient(db.Model):
     __tablename__ = "patients"
     id = db.Column(db.Integer, primary_key=True)
-    Clinic_Visit = db.Column(db.String(100), nullable=False)
+    #Create Foreign Key, "users.id" the users refers to the tablename of User.
+    Clinic_Visit_id = db.Column(db.Integer, db.ForeignKey("uzers.id"))
+    # Create reference to the User object, the "posts" refers to the posts protperty in the User class.
+    Clinic_Visit = relationship("Uzers", back_populates="patients")
     tissue_loss = db.Column(db.String(100), nullable=False)
     edges = db.Column(db.String(100), nullable=False)
     exudate_amount = db.Column(db.String(100), nullable=False)
@@ -108,15 +128,6 @@ class CreatePatient(db.Model):
 # # Create all the tables in the database
 db.create_all()
 
-##CREATE TABLE IN DB
-class Uzers(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
-    name = db.Column(db.String(1000))
-
-# # Create all the tables in the database
-db.create_all()
 
 # #CREATE RECORD
 # new_wound = User( email="admin@gmail.com", password="123456", username="gee", Cardnumber="0123456", fullname="yes men")
@@ -139,7 +150,7 @@ def admin_only(f):
 
 @app.route('/')
 def home():
-    all_users = db.session.query(User).all()
+    all_users = db.session.query(Uzers).all()
     # wound_patients = CreatePatient.query.all()
     return render_template('index.html', users=all_users, logged_in=current_user.is_authenticated)
 
@@ -149,7 +160,7 @@ def home():
 def all_patients():
     # all_patients = db.session.query(CreatePatient).all()
     wound_patients = CreatePatient.query.all()
-    return render_template('all-patients.html', wounds=wound_patients)
+    return render_template('all-patients.html', wounds=wound_patients, current_user=current_user)
 
 
 @app.route("/post/<int:post_id>")
@@ -196,10 +207,11 @@ def edit_post(post_id):
 @app.route('/users')
 # @login_required
 def users():
-    all_users = db.session.query(User).all()
-    all_uzers = db.session.query(Uzers).all()
+    all_uzers = Uzers.query.all()
+    # all_users = db.session.query(User).all()
+    # all_uzers = db.session.query(Uzers).all()
     # wound_patients = CreatePatient.query.all()
-    return render_template('all_users.html', users=all_users, uzers=all_uzers)
+    return render_template('all_users.html', uzers=all_uzers)
 
 
 
@@ -517,4 +529,4 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)

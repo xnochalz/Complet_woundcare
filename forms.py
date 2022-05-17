@@ -40,6 +40,7 @@ class AddPatient(FlaskForm):
     bmi = IntegerField("BMI", validators=[DataRequired()])
     anatomic_location = StringField("Anatomic Location", validators=[DataRequired()])
     type_of_tissue = SelectMultipleField("Type of Tissue in wound bed", validators=[DataRequired()])
+    Clinic_Visit = DateField("Date of Clinic Visit", validators=[DataRequired()])
     # wound = FileField("Wound View")
     submit = SubmitField("Register Patient!")
 
